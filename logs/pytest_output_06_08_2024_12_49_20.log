@@ -1,0 +1,79 @@
+Logging is configured.
+================================================= test session starts =================================================
+platform win32 -- Python 3.12.4, pytest-8.3.2, pluggy-1.5.0
+rootdir: C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project
+configfile: pytest.ini
+plugins: html-4.1.1, metadata-3.1.1
+collected 6 items
+
+tests/api/test_api_todo_pixegami.py::test_api_get getting response message
+
+---------------------------------------------------- live log call ----------------------------------------------------
+2024-08-06 12:49:20 INFO getting response message
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "GET / HTTP/11" 200 39
+{'message': 'Hello World from Todo API'}
+200
+PASSED
+tests/api/test_api_todo_pixegami.py::test_api_put_create_task FAILED
+tests/api/test_api_todo_pixegami.py::test_api_get_task_by_id FAILED
+tests/api/test_api_todo_pixegami.py::test_api_get_task_by_user_id Get task by user id: Test User 1
+
+---------------------------------------------------- live log call ----------------------------------------------------
+2024-08-06 12:49:23 INFO Get task by user id: Test User 1
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "GET /list-tasks/Test%20User%201 HTTP/11" 200 12
+{'tasks': []}
+200
+PASSED
+tests/api/test_api_todo_pixegami.py::test_api_update_task FAILED
+tests/api/test_api_todo_pixegami.py::test_api_del_task_by_id FAILED
+
+====================================================== FAILURES =======================================================
+______________________________________________ test_api_put_create_task _______________________________________________
+
+    def test_api_put_create_task():
+        global task_id
+        payload = {
+            "content": "My test content.",
+            "user_id": "Test User 1",
+            "task_id": "task_id 5",
+            "is_done": False
+        }
+>       Logger.info('Creating new task with id: '+task_id)
+E       NameError: name 'task_id' is not defined
+
+tests\api\test_api_todo_pixegami.py:35: NameError
+_______________________________________________ test_api_get_task_by_id _______________________________________________
+
+    def test_api_get_task_by_id():
+>       print(task_id)
+E       NameError: name 'task_id' is not defined
+
+tests\api\test_api_todo_pixegami.py:49: NameError
+________________________________________________ test_api_update_task _________________________________________________
+
+    def test_api_update_task():
+        payload = {
+            "content": "Updated content",
+            "user_id": "Test user updated",
+>           "task_id": task_id,
+            "is_done": True
+        }
+E       NameError: name 'task_id' is not defined
+
+tests\api\test_api_todo_pixegami.py:76: NameError
+_______________________________________________ test_api_del_task_by_id _______________________________________________
+
+    def test_api_del_task_by_id():
+>       Logger.info("Delete task with id: "+task_id)
+E       NameError: name 'task_id' is not defined
+
+tests\api\test_api_todo_pixegami.py:91: NameError
+- Generated html report: file:///C:/Users/150194/OneDrive%20-%20Arrow%20Electronics%2C%20Inc/Documents/Python/pytest-project/reports/report.html -
+=============================================== short test summary info ===============================================
+FAILED tests/api/test_api_todo_pixegami.py::test_api_put_create_task - NameError: name 'task_id' is not defined
+FAILED tests/api/test_api_todo_pixegami.py::test_api_get_task_by_id - NameError: name 'task_id' is not defined
+FAILED tests/api/test_api_todo_pixegami.py::test_api_update_task - NameError: name 'task_id' is not defined
+FAILED tests/api/test_api_todo_pixegami.py::test_api_del_task_by_id - NameError: name 'task_id' is not defined
+============================================= 4 failed, 2 passed in 6.06s =============================================

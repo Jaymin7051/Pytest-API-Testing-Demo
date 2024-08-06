@@ -1,0 +1,12 @@
+2024-08-05 12:02:28 DEBUG Starting new HTTPS connection (1): todo.pixegami.io:443
+2024-08-05 12:02:29 DEBUG https://todo.pixegami.io:443 "GET / HTTP/11" 200 39
+2024-08-05 12:02:29 DEBUG Starting new HTTPS connection (1): todo.pixegami.io:443
+2024-08-05 12:02:32 DEBUG https://todo.pixegami.io:443 "PUT /create-task HTTP/11" 200 172
+2024-08-05 12:02:32 DEBUG Starting new HTTPS connection (1): todo.pixegami.io:443
+2024-08-05 12:02:33 DEBUG https://todo.pixegami.io:443 "GET /get-task/task_af3c8858e5c94149a6fe0da81296a5f4 HTTP/11" 200 163
+2024-08-05 12:02:33 DEBUG Starting new HTTPS connection (1): todo.pixegami.io:443
+2024-08-05 12:02:34 DEBUG https://todo.pixegami.io:443 "GET /list-tasks/Test%20User%201 HTTP/11" 200 831
+2024-08-05 12:02:34 DEBUG Starting new HTTPS connection (1): todo.pixegami.io:443
+2024-08-05 12:02:35 DEBUG https://todo.pixegami.io:443 "PUT /update-task HTTP/11" 200 31
+2024-08-05 12:02:35 DEBUG Starting new HTTPS connection (1): todo.pixegami.io:443
+2024-08-05 12:02:36 DEBUG https://todo.pixegami.io:443 "DELETE /delete-task/task_af3c8858e5c94149a6fe0da81296a5f4 HTTP/11" 200 59
