@@ -1,0 +1,48 @@
+Logging is configured.
+================================================== test session starts ===================================================
+platform win32 -- Python 3.12.4, pytest-8.3.2, pluggy-1.5.0
+rootdir: C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project
+configfile: pytest.ini
+plugins: html-4.1.1, metadata-3.1.1
+collected 7 items / 6 deselected / 1 selected
+
+tests/api/test_api_todo_pixegami.py::test_api_put_create_task_bad_request Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /create-task HTTP/11" 422 111
+Creating new task with bad request.
+
+----------------------------------------------------- live log call ------------------------------------------------------
+2024-08-07 15:15:22 INFO Creating new task with bad request.
+FAILED                                                                                                              [100%]
+
+======================================================== FAILURES ========================================================
+__________________________________________ test_api_put_create_task_bad_request __________________________________________
+
+    def test_api_put_create_task_bad_request():
+        global task_id
+        payload = {
+            "content": "abc",
+            "user_id": 1,
+            "is_done": "not done"
+        }
+        response = HelperClass.create_task(payload)
+        print(response)
+        response_data = response.json()
+        print(response_data)
+    
+        Logger.info('Creating new task with bad request.')
+        status_code = response.status_code
+        print(status_code)
+>       assert FrameworkConstant.STATUS_CODE_SUCCESS == status_code, response_data["detail"]["msg"]
+E       TypeError: list indices must be integers or slices, not str
+
+tests\api\test_api_todo_pixegami.py:62: TypeError
+-------------------------------------------------- Captured stdout call --------------------------------------------------
+<Response [422]>
+{'detail': [{'loc': ['body', 'is_done'], 'msg': 'value could not be parsed to a boolean', 'type': 'type_error.bool'}]}
+422
+--------------------------------------------------- Captured log call ----------------------------------------------------
+2024-08-07 15:15:22 INFO Creating new task with bad request.
+- Generated html report: file:///C:/Users/150194/OneDrive%20-%20Arrow%20Electronics%2C%20Inc/Documents/Python/pytest-project/reports/report.html -
+================================================ short test summary info =================================================
+FAILED tests/api/test_api_todo_pixegami.py::test_api_put_create_task_bad_request - TypeError: list indices must be integ...
+============================================ 1 failed, 6 deselected in 1.98s =============================================

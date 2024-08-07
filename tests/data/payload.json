@@ -1,0 +1,26 @@
+{
+    "create_task_payload": 
+        {
+            "content": "My test content with json file.",
+            "user_id": "Test User 1",
+            "task_id": "task_id 5",
+            "is_done": false
+        },
+    "invalid_data_type": 
+        {
+            "content": "abc",
+            "user_id": 1,
+            "is_done": "not done"
+        },
+    "missing_required_field": {
+            "user_id": "string",
+            "task_id": "string",
+            "is_done": false
+        },
+    "update_task_payload": {
+            "content": "Updated content with json",
+            "user_id": "Test user updated with json",
+            "task_id": "task_id 5",
+            "is_done": true
+            }
+}

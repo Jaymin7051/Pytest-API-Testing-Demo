@@ -1,0 +1,24 @@
+Logging is configured.
+======================================================= test session starts ========================================================
+platform win32 -- Python 3.12.4, pytest-8.3.2, pluggy-1.5.0
+rootdir: C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project
+configfile: pytest.ini
+plugins: html-4.1.1, metadata-3.1.1
+collected 9 items / 8 deselected / 1 selected
+
+tests/api/test_api_todo_pixegami.py::test_api_put_create_task_missing_required_field FAILED
+
+============================================================= FAILURES =============================================================
+_________________________________________ test_api_put_create_task_missing_required_field __________________________________________
+
+    def test_api_put_create_task_missing_required_field():
+        global task_id
+    
+>       response = HelperClass.create_task(json_payload["missing_required_field"][0])
+E       KeyError: 'missing_required_field'
+
+tests\api\test_api_todo_pixegami.py:66: KeyError
+- Generated html report: file:///C:/Users/150194/OneDrive%20-%20Arrow%20Electronics%2C%20Inc/Documents/Python/pytest-project/reports/report.html -
+===================================================== short test summary info ======================================================
+FAILED tests/api/test_api_todo_pixegami.py::test_api_put_create_task_missing_required_field - KeyError: 'missing_required_field'
+================================================= 1 failed, 8 deselected in 0.58s ==================================================

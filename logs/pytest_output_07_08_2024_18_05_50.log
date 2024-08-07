@@ -1,0 +1,40 @@
+Logging is configured.
+======================================================= test session starts ========================================================
+platform win32 -- Python 3.12.4, pytest-8.3.2, pluggy-1.5.0
+rootdir: C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project
+configfile: pytest.ini
+plugins: html-4.1.1, metadata-3.1.1
+collected 9 items / 8 deselected / 1 selected
+
+tests/api/test_api_todo_pixegami.py::test_api_update_task Update task
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-07 18:05:51 INFO Update task
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /update-task HTTP/11" 200 31
+{'updated_task_id': 'task_id 5'}
+200
+FAILED
+
+============================================================= FAILURES =============================================================
+_______________________________________________________ test_api_update_task _______________________________________________________
+
+    def test_api_update_task():
+    
+        Logger.info("Update task")
+        response = HelperClass.update_task(json_payload["update_payload"])
+        response_data = response.json()
+        print(response_data)
+    
+        status_code = response.status_code
+        print(status_code)
+>       assert task_id == response_data["updated_task_id"]
+E       NameError: name 'task_id' is not defined
+
+tests\api\test_api_todo_pixegami.py:136: NameError
+-------------------------------------------------------- Captured log call ---------------------------------------------------------
+2024-08-07 18:05:51 INFO Update task
+- Generated html report: file:///C:/Users/150194/OneDrive%20-%20Arrow%20Electronics%2C%20Inc/Documents/Python/pytest-project/reports/report.html -
+===================================================== short test summary info ======================================================
+FAILED tests/api/test_api_todo_pixegami.py::test_api_update_task - NameError: name 'task_id' is not defined
+================================================= 1 failed, 8 deselected in 1.80s ==================================================

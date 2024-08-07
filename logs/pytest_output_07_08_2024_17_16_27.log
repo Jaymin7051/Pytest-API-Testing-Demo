@@ -1,0 +1,69 @@
+Logging is configured.
+======================================================= test session starts ========================================================
+platform win32 -- Python 3.12.4, pytest-8.3.2, pluggy-1.5.0
+rootdir: C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project
+configfile: pytest.ini
+plugins: html-4.1.1, metadata-3.1.1
+collected 9 items / 5 deselected / 4 selected
+
+tests/api/test_api_todo_pixegami.py::test_api_put_create_task Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /create-task HTTP/11" 200 187
+Creating new task with id: task_c193cfca7e2c463ab74c0ccaba1a56db
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-07 17:16:32 INFO Creating new task with id: task_c193cfca7e2c463ab74c0ccaba1a56db
+PASSED                                                                                                                        [ 25%]
+tests/api/test_api_todo_pixegami.py::test_api_put_create_task_invalid_data_type Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /create-task HTTP/11" 422 111
+Creating task with invalid data type.
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-07 17:16:33 INFO Creating task with invalid data type.
+PASSED                                                                                                                        [ 50%]
+tests/api/test_api_todo_pixegami.py::test_api_put_create_task_missing_required_field Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /create-task HTTP/11" 422 91
+Creating task with missing one of required field.
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-07 17:16:34 INFO Creating task with missing one of required field.
+PASSED                                                                                                                        [ 75%]
+tests/api/test_api_todo_pixegami.py::test_api_put_create_task_invalid_creationtime Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /create-task HTTP/11" 200 172
+Creating task with missing one of required field.
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-07 17:16:35 INFO Creating task with missing one of required field.
+FAILED                                                                                                                        [100%]
+
+============================================================= FAILURES =============================================================
+__________________________________________ test_api_put_create_task_invalid_creationtime ___________________________________________
+
+    def test_api_put_create_task_invalid_creationtime():
+        global task_id
+        payload = {
+            "content": "My test content.",
+            "user_id": "Test User 1",
+            "task_id": "task_id 5",
+            "is_done": False,
+            "created_time": 7-8-2024
+        }
+        response = HelperClass.create_task(payload)
+        print(response)
+        response_data = response.json()
+        print(response_data)
+    
+        Logger.info('Creating task with missing one of required field.')
+        status_code = response.status_code
+>       response_msg = response_data["detail"][0]["msg"]
+E       KeyError: 'detail'
+
+tests\api\test_api_todo_pixegami.py:104: KeyError
+------------------------------------------------------- Captured stdout call -------------------------------------------------------
+<Response [200]>
+{'task': {'user_id': 'Test User 1', 'content': 'My test content.', 'is_done': False, 'created_time': 1723031194, 'task_id': 'task_af356dfedc9a45b6bd47ce99055ae4fa', 'ttl': 1723117594}}
+-------------------------------------------------------- Captured log call ---------------------------------------------------------
+2024-08-07 17:16:35 INFO Creating task with missing one of required field.
+- Generated html report: file:///C:/Users/150194/OneDrive%20-%20Arrow%20Electronics%2C%20Inc/Documents/Python/pytest-project/reports/report.html -
+===================================================== short test summary info ======================================================
+FAILED tests/api/test_api_todo_pixegami.py::test_api_put_create_task_invalid_creationtime - KeyError: 'detail'
+============================================ 1 failed, 3 passed, 5 deselected in 7.83s =============================================

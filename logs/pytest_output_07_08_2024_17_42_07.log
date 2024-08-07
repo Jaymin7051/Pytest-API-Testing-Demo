@@ -1,0 +1,50 @@
+Logging is configured.
+======================================================= test session starts ========================================================
+platform win32 -- Python 3.12.4, pytest-8.3.2, pluggy-1.5.0
+rootdir: C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project
+configfile: pytest.ini
+plugins: html-4.1.1, metadata-3.1.1
+collected 9 items / 8 deselected / 1 selected
+
+tests/api/test_api_todo_pixegami.py::test_api_put_create_task_invalid_data_type [{'content': 'abc', 'user_id': 1, 'is_done': 'not done'}]
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /create-task HTTP/11" 422 88
+<Response [422]>
+{'detail': [{'loc': ['body'], 'msg': 'value is not a valid dict', 'type': 'type_error.dict'}]}
+Creating task with invalid data type.
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-07 17:42:09 INFO Creating task with invalid data type.
+value is not a valid dict
+422
+FAILED
+
+============================================================= FAILURES =============================================================
+____________________________________________ test_api_put_create_task_invalid_data_type ____________________________________________
+
+    def test_api_put_create_task_invalid_data_type():
+        global task_id
+        print(json_payload["invalid_data_type"])
+        response = HelperClass.create_task(json_payload["invalid_data_type"])
+        print(response)
+        response_data = response.json()
+        print(response_data)
+    
+        Logger.info('Creating task with invalid data type.')
+        status_code = response.status_code
+        response_msg = response_data["detail"][0]["msg"]
+        print(response_msg)
+        print(status_code)
+>       assert FrameworkConstant.MSG_INVALID_DATA_TYPE == response_msg
+E       AssertionError: assert 'value could ... to a boolean' == 'value is not a valid dict'
+E         
+E         - value is not a valid dict
+E         + value could not be parsed to a boolean
+
+tests\api\test_api_todo_pixegami.py:59: AssertionError
+-------------------------------------------------------- Captured log call ---------------------------------------------------------
+2024-08-07 17:42:09 INFO Creating task with invalid data type.
+- Generated html report: file:///C:/Users/150194/OneDrive%20-%20Arrow%20Electronics%2C%20Inc/Documents/Python/pytest-project/reports/report.html -
+===================================================== short test summary info ======================================================
+FAILED tests/api/test_api_todo_pixegami.py::test_api_put_create_task_invalid_data_type - AssertionError: assert 'value could ... t...
+================================================= 1 failed, 8 deselected in 1.57s ==================================================
