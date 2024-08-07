@@ -1,0 +1,67 @@
+Logging is configured.
+================================================== test session starts ===================================================
+platform win32 -- Python 3.12.4, pytest-8.3.2, pluggy-1.5.0
+rootdir: C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project
+configfile: pytest.ini
+plugins: html-4.1.1, metadata-3.1.1
+collected 6 items
+
+tests/api/test_api_todo_pixegami.py::test_api_get getting response message
+
+----------------------------------------------------- live log call ------------------------------------------------------
+2024-08-07 10:46:20 INFO getting response message
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "GET / HTTP/11" 200 39
+{'message': 'Hello World from Todo API'}
+200
+PASSED
+tests/api/test_api_todo_pixegami.py::test_api_put_create_task Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /create-task HTTP/11" 200 172
+{'task': {'user_id': 'Test User 1', 'content': 'My test content.', 'is_done': False, 'created_time': 1723007783, 'task_id': 'task_bc6d9afc90254515bbad8c8b8cdb6117', 'ttl': 1723094183}}
+task_bc6d9afc90254515bbad8c8b8cdb6117
+Creating new task with id: task_bc6d9afc90254515bbad8c8b8cdb6117
+
+----------------------------------------------------- live log call ------------------------------------------------------
+2024-08-07 10:46:25 INFO Creating new task with id: task_bc6d9afc90254515bbad8c8b8cdb6117
+200
+PASSED
+tests/api/test_api_todo_pixegami.py::test_api_get_task_by_id task_bc6d9afc90254515bbad8c8b8cdb6117
+Get task by task id: task_bc6d9afc90254515bbad8c8b8cdb6117
+
+----------------------------------------------------- live log call ------------------------------------------------------
+2024-08-07 10:46:25 INFO Get task by task id: task_bc6d9afc90254515bbad8c8b8cdb6117
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "GET /get-task/task_bc6d9afc90254515bbad8c8b8cdb6117 HTTP/11" 200 163
+{'is_done': False, 'content': 'My test content.', 'ttl': 1723094183, 'user_id': 'Test User 1', 'task_id': 'task_bc6d9afc90254515bbad8c8b8cdb6117', 'created_time': 1723007783}
+200
+PASSED
+tests/api/test_api_todo_pixegami.py::test_api_get_task_by_user_id Get task by user id: Test User 1
+
+----------------------------------------------------- live log call ------------------------------------------------------
+2024-08-07 10:46:26 INFO Get task by user id: Test User 1
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "GET /list-tasks/Test%20User%201 HTTP/11" 200 175
+{'tasks': [{'is_done': False, 'content': 'My test content.', 'ttl': 1723094183, 'user_id': 'Test User 1', 'task_id': 'task_bc6d9afc90254515bbad8c8b8cdb6117', 'created_time': 1723007783}]}
+200
+PASSED
+tests/api/test_api_todo_pixegami.py::test_api_update_task Update task with id: task_bc6d9afc90254515bbad8c8b8cdb6117
+
+----------------------------------------------------- live log call ------------------------------------------------------
+2024-08-07 10:46:27 INFO Update task with id: task_bc6d9afc90254515bbad8c8b8cdb6117
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /update-task HTTP/11" 200 59
+{'updated_task_id': 'task_bc6d9afc90254515bbad8c8b8cdb6117'}
+200
+PASSED
+tests/api/test_api_todo_pixegami.py::test_api_del_task_by_id Delete task with id: task_bc6d9afc90254515bbad8c8b8cdb6117
+
+----------------------------------------------------- live log call ------------------------------------------------------
+2024-08-07 10:46:28 INFO Delete task with id: task_bc6d9afc90254515bbad8c8b8cdb6117
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "DELETE /delete-task/task_bc6d9afc90254515bbad8c8b8cdb6117 HTTP/11" 200 59
+{'deleted_task_id': 'task_bc6d9afc90254515bbad8c8b8cdb6117'}
+200
+PASSED
+
+- Generated html report: file:///C:/Users/150194/OneDrive%20-%20Arrow%20Electronics%2C%20Inc/Documents/Python/pytest-project/reports/report.html -
+=================================================== 6 passed in 10.30s ===================================================

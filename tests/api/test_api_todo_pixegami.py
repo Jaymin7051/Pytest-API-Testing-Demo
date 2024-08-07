@@ -80,9 +80,15 @@ def test_api_update_task():
     response_data = response.json()
     print(response_data)
 
+    Logger.info("Get task with id: "+task_id+" and validate update task")
+    response_updated_task = requests.get(EndpointConstant.ENDPOINT_GET_TASK.format(task_id))
+    response_updated_data = response_updated_task.json()
+    print(response_updated_data)
+
     status_code = response.status_code
     print(status_code)
     assert task_id == response_data["updated_task_id"]
+    assert response_updated_data["content"] == payload["content"]
     assert FrameworkConstant.STATUS_CODE_SUCCESS == status_code
 
 
