@@ -1,4 +1,0 @@
-{'deleted_task_id': 'task_f3e5bc0dd6df47a590bea1cabaf210f4'}
-200
-{'detail': 'Task task_f3e5bc0dd6df47a590bea1cabaf210f4 not found'}
-404

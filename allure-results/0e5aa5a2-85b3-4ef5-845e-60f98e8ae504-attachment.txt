@@ -1,0 +1,3 @@
+{'detail': [{'loc': ['body', 'content'], 'msg': 'field required', 'type': 'value_error.missing'}]}
+422
+field required

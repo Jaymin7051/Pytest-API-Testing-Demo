@@ -4,7 +4,8 @@
             "content": "My test content with json file.",
             "user_id": "Test User 1",
             "task_id": "task_id 5",
-            "is_done": false
+            "is_done": false,
+            "created_time": 1234567891
         },
     "invalid_data_type": 
         {
@@ -22,5 +23,11 @@
             "user_id": "Test user updated with json",
             "task_id": "task_id 5",
             "is_done": true
+            },
+    "update_task_missing_required_field": {
+            "user_id": "Test user updated with json",
+            "task_id": "string",
+            "is_done": true
             }
+
 }

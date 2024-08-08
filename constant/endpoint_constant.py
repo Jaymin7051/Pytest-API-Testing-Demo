@@ -11,3 +11,4 @@ class EndpointConstant:
     ENDPOINT_GET_TASKS_USERID = "https://todo.pixegami.io/list-tasks/{}"
     ENDPOINT_UPDATE_TASK = "https://todo.pixegami.io/update-task"
     ENDPOINT_DELETE_TASK_ID = "https://todo.pixegami.io/delete-task/{}"
+    ENDPOINT_DELETE_TASK = "https://todo.pixegami.io/delete-task/"
