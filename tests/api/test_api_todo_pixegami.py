@@ -16,11 +16,10 @@ Logger = logging.getLogger(__name__)
 json_file = open("./tests/data/payload.json")
 json_payload = json.load(json_file) 
 
-global task_id, invalid_task_id
-
 """
-Test function to get message from API endpoint.  
+Test function to get message from root API endpoint.  
 """
+@pytest.mark.smoke
 def test_api_get():
     Logger.info('getting response message')
     response = requests.get(EndpointConstant.ENDPOINT)
@@ -35,14 +34,15 @@ def test_api_get():
 """
 Test function to crate task.  
 """
+@pytest.mark.smoke
 def test_api_put_create_task():
-    global task_id
-    global invalid_task_id
+    global task_id, invalid_task_id, user_id
     response = HelperClass.create_task(json_payload["create_task_payload"])
     response_data = response.json()
     print(response_data)
     task_id = response_data[FrameworkConstant.TASK][FrameworkConstant.TASK_ID]
     invalid_task_id =  response_data[FrameworkConstant.TASK][FrameworkConstant.TASK_ID] + str(random.randint(1,100))
+    user_id = response_data[FrameworkConstant.TASK][FrameworkConstant.USER_ID]
     print(task_id)
     
     Logger.info('Created new task with id: '+task_id)
@@ -118,6 +118,7 @@ def test_api_put_create_task_invalid_creationtime():
 """
 Test function to get task by specifying task id.  
 """
+@pytest.mark.smoke
 def test_api_get_task_by_id():
     print(task_id)
     Logger.info('Get task by task id: '+task_id)
@@ -150,8 +151,8 @@ def test_api_get_task_by_id_not_exist():
 """
 Test function to get list of tasks associated with specified user id.  
 """
+@pytest.mark.smoke
 def test_api_get_task_by_user_id():
-    user_id = "Test User 1"
     Logger.info("Get list of tasks associated with specified user id: "+user_id)
     response = requests.get(EndpointConstant.ENDPOINT_GET_TASKS_USERID.format(user_id))
     response_data = response.json()
@@ -166,6 +167,7 @@ def test_api_get_task_by_user_id():
 """
 Test function to update task.  
 """
+@pytest.mark.smoke
 def test_api_update_task():
     Logger.info("Update task with id: "+task_id)
     response = HelperClass.update_task(json_payload["update_task_payload"])
@@ -228,6 +230,7 @@ def test_api_update_task_creation_time():
 """
 Test function to delete task specified by id.  
 """
+@pytest.mark.smoke
 def test_api_del_task_by_id():
     Logger.info("Delete task with id: "+task_id)
     response = requests.delete(EndpointConstant.ENDPOINT_DELETE_TASK_ID.format(task_id))

@@ -1,2 +1,0 @@
-2024-08-08 15:51:09 INFO Update task with id: task_6c571bfcdaea45b5badc67eca0a6ec6b
-2024-08-08 15:51:10 INFO Get task with id: task_id 5 and validate update task

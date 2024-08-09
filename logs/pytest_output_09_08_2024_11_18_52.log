@@ -1,0 +1,49 @@
+Logging is configured.
+======================================================= test session starts ========================================================
+platform win32 -- Python 3.12.4, pytest-8.3.2, pluggy-1.5.0
+rootdir: C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project
+configfile: pytest.ini
+plugins: allure-pytest-2.13.5, html-4.1.1, html-reporter-0.2.9, metadata-3.1.1
+collected 14 items / 13 deselected / 1 selected
+
+tests/test_flow.py::test_api_task_flow Creating task.
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-09 11:18:53 INFO Creating task.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /create-task HTTP/11" 200 197
+{'task': {'user_id': 'Test User New', 'content': 'My test content with for Test User New.', 'is_done': False, 'created_time': 1723182533, 'task_id': 'task_65343e92ed0d40139484e8d4ce6b4d4f', 'ttl': 1723268933}}
+1.087425
+200
+Task created successfully.
+2024-08-09 11:18:54 INFO Task created successfully.
+Updating task.
+2024-08-09 11:18:54 INFO Updating task.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /update-task HTTP/11" 200 59
+{'updated_task_id': 'task_65343e92ed0d40139484e8d4ce6b4d4f'}
+0.968047
+200
+Task updated successfully.
+2024-08-09 11:18:55 INFO Task updated successfully.
+Deleting task.
+2024-08-09 11:18:55 INFO Deleting task.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "DELETE /delete-task/task_65343e92ed0d40139484e8d4ce6b4d4f HTTP/11" 200 59
+{'deleted_task_id': 'task_65343e92ed0d40139484e8d4ce6b4d4f'}
+1.035399
+200
+Task deleted successfully.
+2024-08-09 11:18:56 INFO Task deleted successfully.
+Validating whether task is deleted or not.
+2024-08-09 11:18:56 INFO Validating whether task is deleted or not.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "GET /get-task/task_65343e92ed0d40139484e8d4ce6b4d4f HTTP/11" 404 65
+{'detail': 'Task task_65343e92ed0d40139484e8d4ce6b4d4f not found'}
+0.938218
+404
+Task deleted and not found.
+2024-08-09 11:18:57 INFO Task deleted and not found.
+PASSED
+
+================================================= 1 passed, 13 deselected in 4.69s =================================================

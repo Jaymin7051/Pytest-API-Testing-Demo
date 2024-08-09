@@ -1,4 +1,0 @@
-<Response [422]>
-{'detail': [{'loc': ['body', 'content'], 'msg': 'field required', 'type': 'value_error.missing'}]}
-field required
-422

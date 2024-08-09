@@ -1,2 +1,0 @@
-2024-08-08 15:51:12 INFO Delete task with id: task_6c571bfcdaea45b5badc67eca0a6ec6b
-2024-08-08 15:51:13 INFO Validate task is deleted or not.
