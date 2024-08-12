@@ -1,0 +1,77 @@
+Logging is configured.
+======================================================= test session starts ========================================================
+platform win32 -- Python 3.12.4, pytest-8.3.2, pluggy-1.5.0
+rootdir: C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project
+configfile: pytest.ini
+plugins: allure-pytest-2.13.5, html-4.1.1, html-reporter-0.2.9, metadata-3.1.1
+collected 14 items / 13 deselected / 1 selected
+
+tests/test_flow.py::test_api_task_flow Creating task.
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-09 14:01:42 INFO Creating task.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /create-task HTTP/11" 200 200
+{'task': {'user_id': 'Test User Jaymin', 'content': 'My test content with for Test User New.', 'is_done': False, 'created_time': 1723192303, 'task_id': 'task_16cbe35424554422b23eeb9bbb385b3a', 'ttl': 1723278703}}
+1.223278
+200
+Task created successfully.
+2024-08-09 14:01:44 INFO Task created successfully.
+Updating task.
+2024-08-09 14:01:44 INFO Updating task.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /update-task HTTP/11" 200 59
+{'updated_task_id': 'task_16cbe35424554422b23eeb9bbb385b3a'}
+1.119755
+200
+Get task with id: task_16cbe35424554422b23eeb9bbb385b3a and validate if task is updated or not.
+2024-08-09 14:01:45 INFO Get task with id: task_16cbe35424554422b23eeb9bbb385b3a and validate if task is updated or not.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "GET /get-task/task_16cbe35424554422b23eeb9bbb385b3a HTTP/11" 200 183
+{'content': 'Updated content with json Jaymin', 'is_done': True, 'ttl': 1723278703, 'user_id': 'Test User Jaymin', 'task_id': 'task_16cbe35424554422b23eeb9bbb385b3a', 'created_time': 1723192303}
+1.073194
+Task updated successfully.
+2024-08-09 14:01:46 INFO Task updated successfully.
+Deleting task.
+2024-08-09 14:01:46 INFO Deleting task.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "DELETE /delete-task/task_16cbe35424554422b23eeb9bbb385b3a HTTP/11" 200 59
+{'deleted_task_id': 'task_16cbe35424554422b23eeb9bbb385b3a'}
+0.863688
+200
+Task deleted successfully.
+2024-08-09 14:01:47 INFO Task deleted successfully.
+Validating whether task is deleted or not.
+2024-08-09 14:01:47 INFO Validating whether task is deleted or not.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "GET /get-task/task_16cbe35424554422b23eeb9bbb385b3a HTTP/11" 404 65
+{'detail': 'Task task_16cbe35424554422b23eeb9bbb385b3a not found'}
+0.768636
+404
+Task deleted and not found.
+2024-08-09 14:01:47 INFO Task deleted and not found.
+PASSED
+
+========================================================= warnings summary =========================================================
+tests\api\test_api_todo_pixegami.py:22
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:22: PytestUnknownMarkWarning: Unknown pytest.mark.smoke1 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke1
+
+tests\api\test_api_todo_pixegami.py:40
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:40: PytestUnknownMarkWarning: Unknown pytest.mark.smoke4 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke4
+
+tests\api\test_api_todo_pixegami.py:134
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:134: PytestUnknownMarkWarning: Unknown pytest.mark.smoke2 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke2
+
+tests\api\test_api_todo_pixegami.py:173
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:173: PytestUnknownMarkWarning: Unknown pytest.mark.smoke3 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke3
+
+tests\api\test_api_todo_pixegami.py:266
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:266: PytestUnknownMarkWarning: Unknown pytest.mark.smoke5 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke5
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================================== 1 passed, 13 deselected, 5 warnings in 5.92s ===========================================

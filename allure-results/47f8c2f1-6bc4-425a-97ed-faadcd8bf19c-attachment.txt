@@ -1,2 +1,0 @@
-2024-08-09 10:37:40 INFO Get list of tasks associated with specified user id: Test User 1
-2024-08-09 10:37:41 INFO Get list of task with specified user id is completed.

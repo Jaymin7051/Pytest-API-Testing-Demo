@@ -1,0 +1,152 @@
+Logging is configured.
+======================================================= test session starts ========================================================
+platform win32 -- Python 3.12.4, pytest-8.3.2, pluggy-1.5.0
+rootdir: C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project
+configfile: pytest.ini
+plugins: allure-pytest-2.13.5, html-4.1.1, html-reporter-0.2.9, metadata-3.1.1
+collected 14 items / 13 deselected / 1 selected
+
+tests/test_flow.py::test_api_task_flow Creating task.
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-09 14:25:33 INFO Creating task.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /create-task HTTP/11" 200 200
+{'task': {'user_id': 'Test User Jaymin', 'content': 'My test content with for Test User New.', 'is_done': False, 'created_time': 1723193734, 'task_id': 'task_75c6d7fbb9614b17a254074635272ce6', 'ttl': 1723280134}}
+1.358907
+200
+Task created successfully.
+2024-08-09 14:25:34 INFO Task created successfully.
+Updating task.
+2024-08-09 14:25:34 INFO Updating task.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /update-task HTTP/11" 200 59
+{'updated_task_id': 'task_75c6d7fbb9614b17a254074635272ce6'}
+1.223104
+200
+Get task with id: task_75c6d7fbb9614b17a254074635272ce6 and validate if task is updated or not.
+2024-08-09 14:25:35 INFO Get task with id: task_75c6d7fbb9614b17a254074635272ce6 and validate if task is updated or not.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "GET /get-task/task_75c6d7fbb9614b17a254074635272ce6 HTTP/11" 200 183
+{'content': 'Updated content with json Jaymin', 'is_done': True, 'ttl': 1723280134, 'user_id': 'Test User Jaymin', 'task_id': 'task_75c6d7fbb9614b17a254074635272ce6', 'created_time': 1723193734}
+1.121942
+Task updated successfully.
+2024-08-09 14:25:36 INFO Task updated successfully.
+Deleting task.
+2024-08-09 14:25:36 INFO Deleting task.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "DELETE /delete-task/task_75c6d7fbb9614b17a254074635272ce6 HTTP/11" 200 59
+{'deleted_task_id': 'task_75c6d7fbb9614b17a254074635272ce6'}
+1.081602
+200
+Task deleted successfully.
+2024-08-09 14:25:37 INFO Task deleted successfully.
+Validating whether task is deleted or not.
+2024-08-09 14:25:37 INFO Validating whether task is deleted or not.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "GET /get-task/task_75c6d7fbb9614b17a254074635272ce6 HTTP/11" 404 65
+{'detail': 'Task task_75c6d7fbb9614b17a254074635272ce6 not found'}
+2.121849
+FAILED
+
+============================================================= FAILURES =============================================================
+________________________________________________________ test_api_task_flow ________________________________________________________
+
+    def test_api_task_flow():
+        Logger.info("Creating task.")
+        response = HelperClass.create_task(json_payload["create_task_payload"])
+        response_data = response.json()
+        print(response_data)
+        response_time = response.elapsed.total_seconds()
+        print(response_time)
+        assert response_time <= FrameworkConstant.MAX_RESPONSE_TIME_CREATE_TASK
+    
+        task_id = response_data[FrameworkConstant.TASK][FrameworkConstant.TASK_ID]
+        print(response.status_code)
+        assert FrameworkConstant.STATUS_CODE_SUCCESS == response.status_code
+        Logger.info("Task created successfully.")
+    
+        Logger.info("Updating task.")
+        json_payload["update_task_payload"]["task_id"] = task_id
+        response = HelperClass.update_task(json_payload["update_task_payload"])
+        response_data = response.json()
+        print(response_data)
+        response_time = response.elapsed.total_seconds()
+        print(response_time)
+        status_code = response.status_code
+        print(status_code)
+    
+        assert response_data["updated_task_id"] == task_id
+        assert response_time <= FrameworkConstant.MAX_RESPONSE_TIME_UPDATE_TASK
+        assert FrameworkConstant.STATUS_CODE_SUCCESS == status_code
+    
+        Logger.info("Get task with id: "+task_id+" and validate if task is updated or not.")
+        response_updated_task = requests.get(EndpointConstant.ENDPOINT_GET_TASK.format(task_id))
+        response_updated_data = response_updated_task.json()
+        print(response_updated_data)
+        response_time = response_updated_task.elapsed.total_seconds()
+        print(response_time)
+    
+        assert response_time <= FrameworkConstant.MAX_RESPONSE_TIME_GET_TASK
+        assert response_updated_data["content"] == json_payload["update_task_payload"]["content"]
+        Logger.info("Task updated successfully.")
+    
+        Logger.info("Deleting task.")
+        response = requests.delete(EndpointConstant.ENDPOINT_DELETE_TASK_ID.format(task_id))
+        response_data = response.json()
+        print(response_data)
+        response_time = response.elapsed.total_seconds()
+        print(response_time)
+        assert response_time <= FrameworkConstant.MAX_RESPONSE_TIME_DELETE_TASK
+    
+        ststus_code = response.status_code
+        print(ststus_code)
+        assert task_id == response_data["deleted_task_id"]
+        assert FrameworkConstant.STATUS_CODE_SUCCESS == ststus_code
+        Logger.info("Task deleted successfully.")
+    
+        Logger.info("Validating whether task is deleted or not.")
+        response_deleted_task = requests.get(EndpointConstant.ENDPOINT_GET_TASK.format(task_id))
+        response_deleted_data = response_deleted_task.json()
+        print(response_deleted_data)
+        response_time = response_deleted_task.elapsed.total_seconds()
+        print(response_time)
+>       assert response_time <= FrameworkConstant.MAX_RESPONSE_TIME_GET_TASK
+E       assert 2.121849 <= 2.0
+E        +  where 2.0 = FrameworkConstant.MAX_RESPONSE_TIME_GET_TASK
+
+tests\test_flow.py:76: AssertionError
+-------------------------------------------------------- Captured log call ---------------------------------------------------------
+2024-08-09 14:25:33 INFO Creating task.
+2024-08-09 14:25:34 INFO Task created successfully.
+2024-08-09 14:25:34 INFO Updating task.
+2024-08-09 14:25:35 INFO Get task with id: task_75c6d7fbb9614b17a254074635272ce6 and validate if task is updated or not.
+2024-08-09 14:25:36 INFO Task updated successfully.
+2024-08-09 14:25:36 INFO Deleting task.
+2024-08-09 14:25:37 INFO Task deleted successfully.
+2024-08-09 14:25:37 INFO Validating whether task is deleted or not.
+========================================================= warnings summary =========================================================
+tests\api\test_api_todo_pixegami.py:22
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:22: PytestUnknownMarkWarning: Unknown pytest.mark.smoke1 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke1
+
+tests\api\test_api_todo_pixegami.py:40
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:40: PytestUnknownMarkWarning: Unknown pytest.mark.smoke4 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke4
+
+tests\api\test_api_todo_pixegami.py:134
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:134: PytestUnknownMarkWarning: Unknown pytest.mark.smoke2 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke2
+
+tests\api\test_api_todo_pixegami.py:173
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:173: PytestUnknownMarkWarning: Unknown pytest.mark.smoke3 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke3
+
+tests\api\test_api_todo_pixegami.py:266
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:266: PytestUnknownMarkWarning: Unknown pytest.mark.smoke5 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke5
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+===================================================== short test summary info ======================================================
+FAILED tests/test_flow.py::test_api_task_flow - assert 2.121849 <= 2.0
+=========================================== 1 failed, 13 deselected, 5 warnings in 7.90s ===========================================

@@ -1,0 +1,90 @@
+Logging is configured.
+======================================================= test session starts ========================================================
+platform win32 -- Python 3.12.4, pytest-8.3.2, pluggy-1.5.0
+rootdir: C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project
+configfile: pytest.ini
+plugins: allure-pytest-2.13.5, html-4.1.1, html-reporter-0.2.9, metadata-3.1.1
+collected 14 items / 13 deselected / 1 selected
+
+tests/test_flow.py::test_api_task_flow Creating task.
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-09 13:09:39 INFO Creating task.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /create-task HTTP/11" 200 200
+{'task': {'user_id': 'Test User Jaymin', 'content': 'My test content with for Test User New.', 'is_done': False, 'created_time': 1723189180, 'task_id': 'task_027475e5c5ea4cd888a59b24a19dbc0c', 'ttl': 1723275580}}
+1.244625
+200
+Task created successfully.
+2024-08-09 13:09:40 INFO Task created successfully.
+Updating task.
+2024-08-09 13:09:40 INFO Updating task.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /update-task HTTP/11" 200 59
+{'updated_task_id': 'task_027475e5c5ea4cd888a59b24a19dbc0c'}
+1.218426
+200
+FAILED
+
+============================================================= FAILURES =============================================================
+________________________________________________________ test_api_task_flow ________________________________________________________
+
+    def test_api_task_flow():
+        Logger.info("Creating task.")
+        response = HelperClass.create_task(json_payload["create_task_payload"])
+        response_data = response.json()
+        print(response_data)
+        response_time = response.elapsed.total_seconds()
+        print(response_time)
+        assert response_time <= FrameworkConstant.MAX_RESPONSE_TIME_CREATE_TASK
+    
+        task_id = response_data[FrameworkConstant.TASK][FrameworkConstant.TASK_ID]
+        print(response.status_code)
+        assert FrameworkConstant.STATUS_CODE_SUCCESS == response.status_code
+        Logger.info("Task created successfully.")
+    
+        Logger.info("Updating task.")
+        json_payload["update_task_payload"]["task_id"] = task_id
+        response = HelperClass.update_task(json_payload["update_task_payload"])
+        response_data = response.json()
+        print(response_data)
+        response_time = response.elapsed.total_seconds()
+        print(response_time)
+        status_code = response.status_code
+        print(status_code)
+    
+        assert response_data["updated_task_id"] == task_id
+>       assert response_time <= FrameworkConstant.MAX_RESPONSE_TIME_UPDATE_TASK
+E       assert 1.218426 <= 1.2
+E        +  where 1.2 = FrameworkConstant.MAX_RESPONSE_TIME_UPDATE_TASK
+
+tests\test_flow.py:42: AssertionError
+-------------------------------------------------------- Captured log call ---------------------------------------------------------
+2024-08-09 13:09:39 INFO Creating task.
+2024-08-09 13:09:40 INFO Task created successfully.
+2024-08-09 13:09:40 INFO Updating task.
+========================================================= warnings summary =========================================================
+tests\api\test_api_todo_pixegami.py:22
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:22: PytestUnknownMarkWarning: Unknown pytest.mark.smoke1 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke1
+
+tests\api\test_api_todo_pixegami.py:40
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:40: PytestUnknownMarkWarning: Unknown pytest.mark.smoke4 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke4
+
+tests\api\test_api_todo_pixegami.py:134
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:134: PytestUnknownMarkWarning: Unknown pytest.mark.smoke2 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke2
+
+tests\api\test_api_todo_pixegami.py:173
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:173: PytestUnknownMarkWarning: Unknown pytest.mark.smoke3 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke3
+
+tests\api\test_api_todo_pixegami.py:266
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:266: PytestUnknownMarkWarning: Unknown pytest.mark.smoke5 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke5
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+===================================================== short test summary info ======================================================
+FAILED tests/test_flow.py::test_api_task_flow - assert 1.218426 <= 1.2
+=========================================== 1 failed, 13 deselected, 5 warnings in 3.39s ===========================================

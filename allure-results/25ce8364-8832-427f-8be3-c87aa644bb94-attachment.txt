@@ -1,2 +1,0 @@
-2024-08-09 10:37:38 INFO Get task by task id: task_e885b684ccc24e5ba2fc09ed1101f423
-2024-08-09 10:37:39 INFO Get task by task id is completed.

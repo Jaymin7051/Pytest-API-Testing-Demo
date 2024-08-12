@@ -1,15 +1,21 @@
 """
 The file contains setups for test folder
 """
-import logging
-import pytest
 import sys
 import os
+import logging
+import pytest
+import shutil
 from datetime import datetime
 
 
 @pytest.hookimpl(tryfirst=True)
 def pytest_configure(config):
+    """
+    Remove allure report directory each time before test execution.
+    """
+    shutil.rmtree("./allure-results")
+
     """
     Configure logging to capture pytest terminal output.
     """

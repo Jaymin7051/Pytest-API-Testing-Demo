@@ -1,0 +1,112 @@
+Logging is configured.
+======================================================= test session starts ========================================================
+platform win32 -- Python 3.12.4, pytest-8.3.2, pluggy-1.5.0
+rootdir: C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project
+configfile: pytest.ini
+plugins: allure-pytest-2.13.5, html-4.1.1, html-reporter-0.2.9, metadata-3.1.1
+collected 14 items / 13 deselected / 1 selected
+
+tests/test_flow.py::test_api_task_flow Creating task.
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-09 15:17:20 INFO Creating task.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /create-task HTTP/11" 200 200
+{'task': {'user_id': 'Test User Jaymin', 'content': 'My test content with for Test User New.', 'is_done': False, 'created_time': 1723196841, 'task_id': 'task_24367cac2bb64d1aaf266b978fcb233d', 'ttl': 1723283241}}
+1.430569
+200
+Task created successfully.
+2024-08-09 15:17:21 INFO Task created successfully.
+Updating task.
+2024-08-09 15:17:21 INFO Updating task.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /update-task HTTP/11" 200 59
+{'updated_task_id': 'task_24367cac2bb64d1aaf266b978fcb233d'}
+1.122778
+200
+Get task with id: task_24367cac2bb64d1aaf266b978fcb233d and validate if task is updated or not.
+2024-08-09 15:17:23 INFO Get task with id: task_24367cac2bb64d1aaf266b978fcb233d and validate if task is updated or not.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "GET /get-task/task_24367cac2bb64d1aaf266b978fcb233d HTTP/11" 200 183
+{'content': 'Updated content with json Jaymin', 'is_done': True, 'ttl': 1723283241, 'user_id': 'Test User Jaymin', 'task_id': 'task_24367cac2bb64d1aaf266b978fcb233d', 'created_time': 1723196841}
+1.330353
+Task updated successfully.
+2024-08-09 15:17:24 INFO Task updated successfully.
+Deleting task.
+2024-08-09 15:17:24 INFO Deleting task.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "DELETE /delete-task/task_24367cac2bb64d1aaf266b978fcb233d HTTP/11" 200 59
+{'deleted_task_id': 'task_24367cac2bb64d1aaf266b978fcb233d'}
+1.206392
+200
+FAILED
+
+============================================================= FAILURES =============================================================
+________________________________________________________ test_api_task_flow ________________________________________________________
+
+    @pytest.mark.flow
+    def test_api_task_flow():
+        Logger.info("Creating task.")
+        response = HelperClass.create_task(json_payload[FrameworkConstant.CREATE_TASK_PAYLOAD])
+        response_data = response.json()
+        print(response_data)
+        response_time = response.elapsed.total_seconds()
+        print(response_time)
+        task_id = response_data[FrameworkConstant.TASK][FrameworkConstant.TASK_ID]
+        print(response.status_code)
+    
+        assert json_payload[FrameworkConstant.CREATE_TASK_PAYLOAD][FrameworkConstant.CONTENT] == response_data[FrameworkConstant.TASK][FrameworkConstant.CONTENT]
+        assert FrameworkConstant.MAX_RESPONSE_TIME_CREATE_TASK >= response_time
+        assert FrameworkConstant.STATUS_CODE_SUCCESS == response.status_code
+        Logger.info("Task created successfully.")
+    
+        Logger.info("Updating task.")
+        json_payload[FrameworkConstant.UPDATE_TASK_PAYLOAD][FrameworkConstant.TASK_ID] = task_id
+        response = HelperClass.update_task(json_payload[FrameworkConstant.UPDATE_TASK_PAYLOAD])
+        response_data = response.json()
+        print(response_data)
+        response_time = response.elapsed.total_seconds()
+        print(response_time)
+        status_code = response.status_code
+        print(status_code)
+    
+        assert task_id == response_data[FrameworkConstant.UPDATED_TASK_ID]
+        assert FrameworkConstant.MAX_RESPONSE_TIME_UPDATE_TASK >= response_time
+        assert FrameworkConstant.STATUS_CODE_SUCCESS == status_code
+    
+        Logger.info("Get task with id: "+task_id+" and validate if task is updated or not.")
+        response_updated_task = requests.get(EndpointConstant.ENDPOINT_GET_TASK.format(task_id))
+        response_updated_data = response_updated_task.json()
+        print(response_updated_data)
+        response_time = response_updated_task.elapsed.total_seconds()
+        print(response_time)
+    
+        assert FrameworkConstant.MAX_RESPONSE_TIME_GET_TASK >= response_time
+        assert json_payload[FrameworkConstant.UPDATE_TASK_PAYLOAD][FrameworkConstant.CONTENT] == response_updated_data[FrameworkConstant.CONTENT]
+        Logger.info("Task updated successfully.")
+    
+        Logger.info("Deleting task.")
+        response = requests.delete(EndpointConstant.ENDPOINT_DELETE_TASK_ID.format(task_id))
+        response_data = response.json()
+        print(response_data)
+        response_time = response.elapsed.total_seconds()
+        print(response_time)
+        ststus_code = response.status_code
+        print(ststus_code)
+    
+        assert task_id == response_data[FrameworkConstant.DELETED_TASK_ID]
+>       assert FrameworkConstant.MAX_RESPONSE_TIME_DELETE_TASK >= response_time
+E       assert 1.2 >= 1.206392
+E        +  where 1.2 = FrameworkConstant.MAX_RESPONSE_TIME_DELETE_TASK
+
+tests\test_flow.py:70: AssertionError
+-------------------------------------------------------- Captured log call ---------------------------------------------------------
+2024-08-09 15:17:20 INFO Creating task.
+2024-08-09 15:17:21 INFO Task created successfully.
+2024-08-09 15:17:21 INFO Updating task.
+2024-08-09 15:17:23 INFO Get task with id: task_24367cac2bb64d1aaf266b978fcb233d and validate if task is updated or not.
+2024-08-09 15:17:24 INFO Task updated successfully.
+2024-08-09 15:17:24 INFO Deleting task.
+===================================================== short test summary info ======================================================
+FAILED tests/test_flow.py::test_api_task_flow - assert 1.2 >= 1.206392
+================================================= 1 failed, 13 deselected in 6.00s =================================================

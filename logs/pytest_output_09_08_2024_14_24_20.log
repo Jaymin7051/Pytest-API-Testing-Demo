@@ -1,0 +1,44 @@
+Logging is configured.
+======================================================= test session starts ========================================================
+platform win32 -- Python 3.12.4, pytest-8.3.2, pluggy-1.5.0
+rootdir: C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project
+configfile: pytest.ini
+plugins: allure-pytest-2.13.5, html-4.1.1, html-reporter-0.2.9, metadata-3.1.1
+collected 14 items / 13 deselected / 1 selected
+
+tests/api/test_api_todo_pixegami.py::test_api_get_task_by_id FAILED                                                           [100%]
+
+============================================================= FAILURES =============================================================
+_____________________________________________________ test_api_get_task_by_id ______________________________________________________
+
+    @pytest.mark.smoke2
+    def test_api_get_task_by_id():
+>       print(task_id)
+E       NameError: name 'task_id' is not defined
+
+tests\api\test_api_todo_pixegami.py:136: NameError
+========================================================= warnings summary =========================================================
+tests\api\test_api_todo_pixegami.py:22
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:22: PytestUnknownMarkWarning: Unknown pytest.mark.smoke1 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke1
+
+tests\api\test_api_todo_pixegami.py:40
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:40: PytestUnknownMarkWarning: Unknown pytest.mark.smoke4 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke4
+
+tests\api\test_api_todo_pixegami.py:134
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:134: PytestUnknownMarkWarning: Unknown pytest.mark.smoke2 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke2
+
+tests\api\test_api_todo_pixegami.py:173
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:173: PytestUnknownMarkWarning: Unknown pytest.mark.smoke3 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke3
+
+tests\api\test_api_todo_pixegami.py:266
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:266: PytestUnknownMarkWarning: Unknown pytest.mark.smoke5 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke5
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+===================================================== short test summary info ======================================================
+FAILED tests/api/test_api_todo_pixegami.py::test_api_get_task_by_id - NameError: name 'task_id' is not defined
+=========================================== 1 failed, 13 deselected, 5 warnings in 0.89s ===========================================

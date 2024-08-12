@@ -1,0 +1,9 @@
+2024-08-12 10:44:59 INFO Creating task.
+2024-08-12 10:45:00 INFO Task created successfully.
+2024-08-12 10:45:00 INFO Updating task.
+2024-08-12 10:45:01 INFO Get task with id: task_7dc0f17a898548f2a69f4b83b5779839 and validate if task is updated or not.
+2024-08-12 10:45:02 INFO Task updated successfully.
+2024-08-12 10:45:02 INFO Deleting task.
+2024-08-12 10:45:04 INFO Task deleted successfully.
+2024-08-12 10:45:04 INFO Validating whether task is deleted or not.
+2024-08-12 10:45:05 INFO Task deleted and not found.

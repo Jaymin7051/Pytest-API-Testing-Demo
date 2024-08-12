@@ -1,0 +1,237 @@
+Logging is configured.
+======================================================= test session starts ========================================================
+platform win32 -- Python 3.12.4, pytest-8.3.2, pluggy-1.5.0
+rootdir: C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project
+configfile: pytest.ini
+plugins: allure-pytest-2.13.5, html-4.1.1, html-reporter-0.2.9, metadata-3.1.1
+collected 14 items
+
+tests/api/test_api_todo_pixegami.py::test_api_get getting response message.
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-09 16:59:48 INFO getting response message.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "GET / HTTP/11" 200 39
+{'message': 'Hello World from Todo API'}
+0.854192
+200
+Got response message successfully.
+2024-08-09 16:59:49 INFO Got response message successfully.
+PASSED
+tests/api/test_api_todo_pixegami.py::test_api_put_create_task Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /create-task HTTP/11" 200 192
+{'task': {'user_id': 'Test User Jaymin', 'content': 'My test content with json file.', 'is_done': False, 'created_time': 1723202989, 'task_id': 'task_d8aea999c3bb4dd58e7530dc7d73d454', 'ttl': 1723289389}}
+3.01871
+task_d8aea999c3bb4dd58e7530dc7d73d454
+Created new task with id: task_d8aea999c3bb4dd58e7530dc7d73d454
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-09 16:59:52 INFO Created new task with id: task_d8aea999c3bb4dd58e7530dc7d73d454
+200
+FAILED
+tests/api/test_api_todo_pixegami.py::test_api_put_create_task_invalid_data_type Creating task with invalid data type.
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-09 16:59:52 INFO Creating task with invalid data type.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /create-task HTTP/11" 422 111
+{'detail': [{'loc': ['body', 'is_done'], 'msg': 'value could not be parsed to a boolean', 'type': 'type_error.bool'}]}
+0.720434
+value could not be parsed to a boolean
+422
+Task is not created as we have given data with invalid data type.
+2024-08-09 16:59:52 INFO Task is not created as we have given data with invalid data type.
+PASSED
+tests/api/test_api_todo_pixegami.py::test_api_put_create_task_missing_required_field Creating task with missing one of required field.
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-09 16:59:52 INFO Creating task with missing one of required field.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /create-task HTTP/11" 422 91
+{'detail': [{'loc': ['body', 'content'], 'msg': 'field required', 'type': 'value_error.missing'}]}
+0.723722
+field required
+422
+Task is not created as one of required field is missing.
+2024-08-09 16:59:53 INFO Task is not created as one of required field is missing.
+PASSED
+tests/api/test_api_todo_pixegami.py::test_api_put_create_task_invalid_creationtime SKIPPED (unconditional skip)
+tests/api/test_api_todo_pixegami.py::test_api_get_task_by_id task_d8aea999c3bb4dd58e7530dc7d73d454
+Get task by task id: task_d8aea999c3bb4dd58e7530dc7d73d454
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-09 16:59:53 INFO Get task by task id: task_d8aea999c3bb4dd58e7530dc7d73d454
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "GET /get-task/task_d8aea999c3bb4dd58e7530dc7d73d454 HTTP/11" 200 183
+{'is_done': False, 'content': 'My test content with json file.', 'ttl': 1723289389, 'user_id': 'Test User Jaymin', 'task_id': 'task_d8aea999c3bb4dd58e7530dc7d73d454', 'created_time': 1723202989}
+1.026077
+200
+Get task by task id is completed.
+2024-08-09 16:59:54 INFO Get task by task id is completed.
+PASSED
+tests/api/test_api_todo_pixegami.py::test_api_get_task_by_id_not_exist Get task by task id: task_d8aea999c3bb4dd58e7530dc7d73d45490 which is not created.
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-09 16:59:54 INFO Get task by task id: task_d8aea999c3bb4dd58e7530dc7d73d45490 which is not created.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "GET /get-task/task_d8aea999c3bb4dd58e7530dc7d73d45490 HTTP/11" 404 67
+{'detail': 'Task task_d8aea999c3bb4dd58e7530dc7d73d45490 not found'}
+0.99511
+404
+Task with specified id, is not found.
+2024-08-09 16:59:55 INFO Task with specified id, is not found.
+PASSED
+tests/api/test_api_todo_pixegami.py::test_api_get_task_by_user_id Get list of tasks associated with specified user id: Test User Jaymin
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-09 16:59:55 INFO Get list of tasks associated with specified user id: Test User Jaymin
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "GET /list-tasks/Test%20User%20Jaymin HTTP/11" 200 1907
+{'tasks': [{'is_done': False, 'content': 'My test content with json file.', 'ttl': 1723289389, 'user_id': 'Test User Jaymin', 'task_id': 'task_d8aea999c3bb4dd58e7530dc7d73d454', 'created_time': 1723202989}, {'is_done': True, 'content': 'Updated content with json Jaymin', 'ttl': 1723283177, 'user_id': 'Test User Jaymin', 'task_id': 'task_4f553c5c546b439895586796d59d24f0', 'created_time': 1723196777}, {'is_done': False, 'content': 'My test content with for Test User New.', 'ttl': 1723283159, 'user_id': 'Test User Jaymin', 'task_id': 'task_6bed2aae7c3c482794927b2535ca6e40', 'created_time': 1723196759}, {'is_done': True, 'content': 'Updated content with json Jaymin', 'ttl': 1723282558, 'user_id': 'Test User Jaymin', 'task_id': 'task_5d72c1e7edfc4ce7b8216a7aea09087e', 'created_time': 1723196158}, {'is_done': False, 'content': 'My test content with for Test User New.', 'ttl': 1723282408, 'user_id': 'Test User Jaymin', 'task_id': 'task_2ed80f95af6c41c6abdffd98d61d0242', 'created_time': 1723196008}, {'is_done': False, 'content': 'My test content with for Test User New.', 'ttl': 1723280542, 'user_id': 'Test User Jaymin', 'task_id': 'task_5d6b29211ca24b2ea3e1964abcf86783', 'created_time': 1723194142}, {'is_done': False, 'content': 'My test content with for Test User New.', 'ttl': 1723280120, 'user_id': 'Test User Jaymin', 'task_id': 'task_59a1917c27c545b08e758e5fcbb155f6', 'created_time': 1723193720}, {'is_done': False, 'content': 'My test content with for Test User New.', 'ttl': 1723279069, 'user_id': 'Test User Jaymin', 'task_id': 'task_54484b330278469f889791327276fe20', 'created_time': 1723192669}, {'is_done': False, 'content': 'My test content with for Test User New.', 'ttl': 1723278686, 'user_id': 'Test User Jaymin', 'task_id': 'task_2f0327b9512c44698545caa7de794190', 'created_time': 1723192286}, {'is_done': False, 'content': 'My test content with for Test User New.', 'ttl': 1723275612, 'user_id': 'Test User Jaymin', 'task_id': 'task_ae57b341361442c993b66eec6276f942', 'created_time': 1723189212}]}
+1.054937
+200
+Get list of task with specified user id is completed.
+2024-08-09 16:59:56 INFO Get list of task with specified user id is completed.
+PASSED
+tests/api/test_api_todo_pixegami.py::test_api_update_task Update task with id: task_d8aea999c3bb4dd58e7530dc7d73d454
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-09 16:59:56 INFO Update task with id: task_d8aea999c3bb4dd58e7530dc7d73d454
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /update-task HTTP/11" 200 59
+{'updated_task_id': 'task_d8aea999c3bb4dd58e7530dc7d73d454'}
+0.888744
+200
+Get task with id: task_d8aea999c3bb4dd58e7530dc7d73d454 and validate if task is updated or not.
+2024-08-09 16:59:57 INFO Get task with id: task_d8aea999c3bb4dd58e7530dc7d73d454 and validate if task is updated or not.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "GET /get-task/task_d8aea999c3bb4dd58e7530dc7d73d454 HTTP/11" 200 176
+{'content': 'Updated content with json', 'is_done': True, 'ttl': 1723289389, 'user_id': 'Test User Jaymin', 'task_id': 'task_d8aea999c3bb4dd58e7530dc7d73d454', 'created_time': 1723202989}
+0.89647
+Task is updated with the new parameters.
+2024-08-09 16:59:58 INFO Task is updated with the new parameters.
+PASSED
+tests/api/test_api_todo_pixegami.py::test_api_update_task_missing_required_field Update task with missing required field 'content'.
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-09 16:59:58 INFO Update task with missing required field 'content'.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /update-task HTTP/11" 422 91
+{'detail': [{'loc': ['body', 'content'], 'msg': 'field required', 'type': 'value_error.missing'}]}
+0.843927
+Validate task is updated or not as required field is missing.
+2024-08-09 16:59:59 INFO Validate task is updated or not as required field is missing.
+422
+field required
+Task is not updated as required field is missing.
+2024-08-09 16:59:59 INFO Task is not updated as required field is missing.
+PASSED
+tests/api/test_api_todo_pixegami.py::test_api_update_task_creation_time SKIPPED (unconditional skip)
+tests/api/test_api_todo_pixegami.py::test_api_del_task_by_id Delete task with id: task_51ca180c0d1a4686bf652fb00efc4e56
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-09 16:59:59 INFO Delete task with id: task_51ca180c0d1a4686bf652fb00efc4e56
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "DELETE /delete-task/task_51ca180c0d1a4686bf652fb00efc4e56 HTTP/11" 200 59
+{'deleted_task_id': 'task_51ca180c0d1a4686bf652fb00efc4e56'}
+1.005873
+200
+Get task and validate whether it is deleted or not.
+2024-08-09 17:00:00 INFO Get task and validate whether it is deleted or not.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "GET /get-task/task_51ca180c0d1a4686bf652fb00efc4e56 HTTP/11" 404 65
+{'detail': 'Task task_51ca180c0d1a4686bf652fb00efc4e56 not found'}
+1.045887
+404
+Task deleted successfully
+2024-08-09 17:00:01 INFO Task deleted successfully
+PASSED
+tests/api/test_api_todo_pixegami.py::test_api_del_task_by_missing_id Delete task without id.
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-09 17:00:01 INFO Delete task without id.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "DELETE /delete-task/ HTTP/11" 404 22
+{'detail': 'Not Found'}
+0.800418
+404
+Task not found.
+2024-08-09 17:00:02 INFO Task not found.
+PASSED
+tests/test_flow.py::test_api_task_flow Creating task.
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-09 17:00:02 INFO Creating task.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /create-task HTTP/11" 200 200
+{'task': {'user_id': 'Test User Jaymin', 'content': 'My test content with for Test User New.', 'is_done': False, 'created_time': 1723203003, 'task_id': 'task_ced22a6ede504336bdea3d688cb500e0', 'ttl': 1723289403}}
+1.053584
+200
+Task created successfully.
+2024-08-09 17:00:03 INFO Task created successfully.
+Updating task.
+2024-08-09 17:00:03 INFO Updating task.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "PUT /update-task HTTP/11" 200 59
+{'updated_task_id': 'task_ced22a6ede504336bdea3d688cb500e0'}
+0.769286
+200
+Get task with id: task_ced22a6ede504336bdea3d688cb500e0 and validate if task is updated or not.
+2024-08-09 17:00:04 INFO Get task with id: task_ced22a6ede504336bdea3d688cb500e0 and validate if task is updated or not.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "GET /get-task/task_ced22a6ede504336bdea3d688cb500e0 HTTP/11" 200 183
+{'content': 'Updated content with json Jaymin', 'is_done': True, 'ttl': 1723289403, 'user_id': 'Test User Jaymin', 'task_id': 'task_ced22a6ede504336bdea3d688cb500e0', 'created_time': 1723203003}
+1.104847
+Task updated successfully.
+2024-08-09 17:00:05 INFO Task updated successfully.
+Deleting task.
+2024-08-09 17:00:05 INFO Deleting task.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "DELETE /delete-task/task_ced22a6ede504336bdea3d688cb500e0 HTTP/11" 200 59
+{'deleted_task_id': 'task_ced22a6ede504336bdea3d688cb500e0'}
+0.809826
+200
+Task deleted successfully.
+2024-08-09 17:00:06 INFO Task deleted successfully.
+Validating whether task is deleted or not.
+2024-08-09 17:00:06 INFO Validating whether task is deleted or not.
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "GET /get-task/task_ced22a6ede504336bdea3d688cb500e0 HTTP/11" 404 65
+{'detail': 'Task task_ced22a6ede504336bdea3d688cb500e0 not found'}
+0.968191
+404
+Task deleted and not found.
+2024-08-09 17:00:07 INFO Task deleted and not found.
+PASSED
+
+============================================================= FAILURES =============================================================
+_____________________________________________________ test_api_put_create_task _____________________________________________________
+
+    @pytest.mark.smoke4
+    def test_api_put_create_task():
+        global task_id, invalid_task_id, user_id
+        response = HelperClass.create_task(json_payload["create_task_payload"])
+        response_data = response.json()
+        print(response_data)
+        response_time = response.elapsed.total_seconds()
+        print(response_time)
+    
+        task_id = response_data[FrameworkConstant.TASK][FrameworkConstant.TASK_ID]
+        invalid_task_id =  response_data[FrameworkConstant.TASK][FrameworkConstant.TASK_ID] + str(random.randint(1,100))
+        user_id = response_data[FrameworkConstant.TASK][FrameworkConstant.USER_ID]
+        print(task_id)
+    
+        Logger.info('Created new task with id: '+task_id)
+        status_code = response.status_code
+        print(status_code)
+    
+>       assert FrameworkConstant.MAX_RESPONSE_TIME_CREATE_TASK >= response_time
+E       assert 1.9 >= 3.01871
+E        +  where 1.9 = FrameworkConstant.MAX_RESPONSE_TIME_CREATE_TASK
+
+tests\api\test_api_todo_pixegami.py:59: AssertionError
+-------------------------------------------------------- Captured log call ---------------------------------------------------------
+2024-08-09 16:59:52 INFO Created new task with id: task_d8aea999c3bb4dd58e7530dc7d73d454
+===================================================== short test summary info ======================================================
+FAILED tests/api/test_api_todo_pixegami.py::test_api_put_create_task - assert 1.9 >= 3.01871
+============================================= 1 failed, 11 passed, 2 skipped in 20.44s =============================================

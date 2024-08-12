@@ -1,3 +1,0 @@
-2024-08-09 10:37:41 INFO Update task with id: task_e885b684ccc24e5ba2fc09ed1101f423
-2024-08-09 10:37:43 INFO Get task with id: task_id 5 and validate if task is updated or not.
-2024-08-09 10:37:43 INFO Task is updated with the new parameters.

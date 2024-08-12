@@ -1,0 +1,65 @@
+Logging is configured.
+======================================================= test session starts ========================================================
+platform win32 -- Python 3.12.4, pytest-8.3.2, pluggy-1.5.0
+rootdir: C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project
+configfile: pytest.ini
+plugins: allure-pytest-2.13.5, html-4.1.1, html-reporter-0.2.9, metadata-3.1.1
+collected 14 items / 13 deselected / 1 selected
+
+tests/api/test_api_todo_pixegami.py::test_api_del_task_by_id Delete task with id: 
+
+---------------------------------------------------------- live log call -----------------------------------------------------------
+2024-08-09 12:35:54 INFO Delete task with id: 
+Starting new HTTPS connection (1): todo.pixegami.io:443
+https://todo.pixegami.io:443 "DELETE /delete-task/task_063d5cdf82e34a4b81f6afb19ad90b50 HTTP/11" 200 59
+{'deleted_task_id': 'task_063d5cdf82e34a4b81f6afb19ad90b50'}
+1.160967
+200
+FAILED
+
+============================================================= FAILURES =============================================================
+_____________________________________________________ test_api_del_task_by_id ______________________________________________________
+
+    @pytest.mark.smoke5
+    def test_api_del_task_by_id():
+        Logger.info("Delete task with id: ")
+        response = requests.delete(EndpointConstant.ENDPOINT_DELETE_TASK_ID.format("task_063d5cdf82e34a4b81f6afb19ad90b50"))
+        response_data = response.json()
+        print(response_data)
+        response_time = response.elapsed.total_seconds()
+        print(response_time)
+        assert response_time <= FrameworkConstant.MAX_RESPONSE_TIME_DELETE_TASK
+    
+        ststus_code = response.status_code
+        print(ststus_code)
+>       assert task_id == response_data["deleted_task_id"]
+E       NameError: name 'task_id' is not defined
+
+tests\api\test_api_todo_pixegami.py:278: NameError
+-------------------------------------------------------- Captured log call ---------------------------------------------------------
+2024-08-09 12:35:54 INFO Delete task with id:
+========================================================= warnings summary =========================================================
+tests\api\test_api_todo_pixegami.py:22
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:22: PytestUnknownMarkWarning: Unknown pytest.mark.smoke1 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke1
+
+tests\api\test_api_todo_pixegami.py:40
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:40: PytestUnknownMarkWarning: Unknown pytest.mark.smoke4 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke4
+
+tests\api\test_api_todo_pixegami.py:134
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:134: PytestUnknownMarkWarning: Unknown pytest.mark.smoke2 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke2
+
+tests\api\test_api_todo_pixegami.py:173
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:173: PytestUnknownMarkWarning: Unknown pytest.mark.smoke3 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke3
+
+tests\api\test_api_todo_pixegami.py:266
+  C:\Users\150194\OneDrive - Arrow Electronics, Inc\Documents\Python\pytest-project\tests\api\test_api_todo_pixegami.py:266: PytestUnknownMarkWarning: Unknown pytest.mark.smoke5 - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke5
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+===================================================== short test summary info ======================================================
+FAILED tests/api/test_api_todo_pixegami.py::test_api_del_task_by_id - NameError: name 'task_id' is not defined
+=========================================== 1 failed, 13 deselected, 5 warnings in 2.77s ===========================================

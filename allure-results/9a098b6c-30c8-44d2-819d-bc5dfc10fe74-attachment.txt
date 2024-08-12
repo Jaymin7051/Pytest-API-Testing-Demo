@@ -1,8 +1,0 @@
-2024-08-09 11:01:20 INFO Creating task.
-2024-08-09 11:01:21 INFO Task created successfully.
-2024-08-09 11:01:21 INFO Updating task.
-2024-08-09 11:01:22 INFO Task updated successfully.
-2024-08-09 11:01:22 INFO Deleting task.
-2024-08-09 11:01:23 INFO Task deleted successfully.
-2024-08-09 11:01:23 INFO Validating whether task is deleted or not.
-2024-08-09 11:01:24 INFO Task deleted and not found.
